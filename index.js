@@ -4,6 +4,7 @@ const cors = require('cors');
 const port = process.env.PORT || 5000;
 require('dotenv').config();
 const { MongoClient, ServerApiVersion } = require('mongodb');
+const res = require('express/lib/response');
 
 
 // medile were 
@@ -17,10 +18,22 @@ async function run() {
     try {
         await client.connect();
         const productCollection = client.db("manufractur").collection("product");
+        const orderCollection = client.db("manufractur").collection("order");
         app.get('/service', async (req, res) => {
             const quary = {};
             const service = await productCollection.find(quary).toArray();
             res.send(service);
+        })
+        app.post('/order', async (req, res) => {
+            const requst = req.body;
+            const result = await orderCollection.insertOne(requst);
+            res.send(result);
+            console.log(result);
+        })
+        app.get('/order', async (req, res) => {
+            const quary = {};
+            const order = await orderCollection.find(quary).toArray();
+            res.send(order);
         })
     } finally {
         // client.close();
