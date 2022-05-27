@@ -18,7 +18,7 @@ async function run() {
     try {
         await client.connect();
         const productCollection = client.db("manufractur").collection("product");
-        // const orderCollection = client.db("manufractur").collection("order");
+        const orderCollection = client.db("manufractur").collection("order");
         const adminCollection = client.db("manufractur").collection("admin");
         const reviewsCollection = client.db("manufractur").collection("review");
         const newproductCollection = client.db("manufractur").collection("newproduct");
