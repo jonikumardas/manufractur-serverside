@@ -18,7 +18,7 @@ async function run() {
     try {
         await client.connect();
         const productCollection = client.db("manufractur").collection("product");
-        const orderCollection = client.db("manufractur").collection("order");
+        // const orderCollection = client.db("manufractur").collection("order");
         const adminCollection = client.db("manufractur").collection("admin");
         const reviewsCollection = client.db("manufractur").collection("review");
         const newproductCollection = client.db("manufractur").collection("newproduct");
@@ -47,12 +47,8 @@ async function run() {
             console.log(result);
         })
 
-        // app.get('/admin', async (req, res) => {
-        //     const quary = {};
-        //     const order = await adminCollection.find(quary).toArray();
-        //     res.send(order);
-        // })
-        // for revew 
+
+
         app.post('/review', async (req, res) => {
             const requst = req.body;
             const result = await reviewsCollection.insertOne(requst)
@@ -68,6 +64,11 @@ async function run() {
             const requst = req.body;
             const result = await newproductCollection.insertOne(requst);
             res.send(result);
+        })
+        app.get('/newproduct', async (req, res) => {
+            const quary = {};
+            const reveiw = await newproductCollection.find(quary).toArray()
+            res.send(reveiw);
         })
 
 
