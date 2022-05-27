@@ -26,6 +26,7 @@ async function run() {
             const service = await productCollection.find(quary).toArray();
             res.send(service);
         })
+        // order parpous
         app.post('/order', async (req, res) => {
             const requst = req.body;
             const result = await orderCollection.insertOne(requst);
@@ -37,6 +38,7 @@ async function run() {
             const order = await orderCollection.find(quary).toArray();
             res.send(order);
         })
+        // email purpas
         app.post('/email', async (req, res) => {
             const requst = req.body;
             const result = await adminCollection.insertOne(requst);
@@ -44,16 +46,21 @@ async function run() {
             console.log(result);
         })
 
-        app.get('/admin', async (req, res) => {
-            const quary = {};
-            const order = await adminCollection.find(quary).toArray();
-            res.send(order);
-        })
-
+        // app.get('/admin', async (req, res) => {
+        //     const quary = {};
+        //     const order = await adminCollection.find(quary).toArray();
+        //     res.send(order);
+        // })
+        // for revew 
         app.post('/review', async (req, res) => {
             const requst = req.body;
             const result = await reviewsCollection.insertOne(requst)
             res.send(result);
+        })
+        app.get('/review', async (req, res) => {
+            const quary = {};
+            const reveiw = await reviewsCollection.find(quary).toArray()
+            res.send(reveiw);
         })
 
     } finally {
