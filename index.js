@@ -70,6 +70,17 @@ async function run() {
             const reveiw = await newproductCollection.find(quary).toArray()
             res.send(reveiw);
         })
+        app.put('/user/:email', async (req, res) => {
+            const email = rew.params.email;
+            const user = req.body;
+            const filtter = { email: email };
+            const options = { upsert: true };
+            const updateDoc = {
+                $set: user,
+            }
+            const result = await adminCollection.updateOne(filtter, updateDoc, options)
+            res.send(result);
+        })
 
 
 
