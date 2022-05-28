@@ -47,6 +47,11 @@ async function run() {
             res.send(result);
             console.log(result);
         })
+        app.get('/email', async (req, res) => {
+            const quary = {};
+            const result = await adminCollection.find(quary).toArray();
+            res.send(result)
+        })
         app.post('/review', async (req, res) => {
             const requst = req.body;
             const result = await reviewsCollection.insertOne(requst)
