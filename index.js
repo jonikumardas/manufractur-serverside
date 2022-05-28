@@ -53,17 +53,13 @@ async function run() {
             const result = await adminCollection.find(quary).toArray();
             res.send(result)
         })
-
         // super admin email 
-
         app.post('/adminemail', async (req, res) => {
             const requst = req.body;
             const result = await superAdmin.insertOne(requst);
             res.send(result);
             console.log(result);
         })
-
-
 
         app.post('/review', async (req, res) => {
             const requst = req.body;
