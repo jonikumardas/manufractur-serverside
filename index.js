@@ -19,9 +19,10 @@ async function run() {
         await client.connect();
         const productCollection = client.db("manufractur").collection("product");
         const orderCollection = client.db("manufractur").collection("order");
-        const adminCollection = client.db("manufractur").collection("admin");
         const reviewsCollection = client.db("manufractur").collection("review");
-        const newproductCollection = client.db("manufractur").collection("newproduct");
+        const newproductCollection = client.db("manufractur").collection
+            ("newproduct");
+        const adminCollection = client.db("manufractur").collection("admin");
         app.get('/service', async (req, res) => {
             const quary = {};
             const service = await productCollection.find(quary).toArray();
@@ -46,9 +47,6 @@ async function run() {
             res.send(result);
             console.log(result);
         })
-
-
-
         app.post('/review', async (req, res) => {
             const requst = req.body;
             const result = await reviewsCollection.insertOne(requst)
@@ -70,17 +68,18 @@ async function run() {
             const reveiw = await newproductCollection.find(quary).toArray()
             res.send(reveiw);
         })
-        app.put('/user/:email', async (req, res) => {
-            const email = rew.params.email;
-            const user = req.body;
-            const filtter = { email: email };
-            const options = { upsert: true };
-            const updateDoc = {
-                $set: user,
-            }
-            const result = await adminCollection.updateOne(filtter, updateDoc, options)
-            res.send(result);
-        })
+        // app.put('/user/:email', async (req, res) => {
+        //     const email = req.params.email;
+        //     const user = req.body;
+        //     const filter = { email: email };
+        //     const options = { upsert: true };
+        //     const updateDoc = {
+        //         $set: user,
+        //     }
+        //     const result = await adminCollection.updateOne(filter, updateDoc, options)
+        //     res.send(result);
+        //     console.log(result);
+        // })
 
 
 
